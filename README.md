@@ -1,7 +1,7 @@
 # Real-Time-Systems
 
 Done as a project for Real time systems/Embedded developement.
-* Glossary
+## Glossary
 
 1.1 - Random_signals
 
