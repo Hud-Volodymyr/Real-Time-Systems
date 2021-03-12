@@ -1,24 +1,23 @@
 from random_signals import signal_generator
-from correlations import autocorrelation, correlation
+from DFT import discrete_fourier_transform
 import matplotlib.pyplot as plotter
 
 n = 14
 w = 2000
 N = 264
 
-x_signal = signal_generator(n, w, N)
-xx_correlated = autocorrelation(x_signal, 264)
-y_signal = signal_generator(n, w, N)
-xy_correlated = correlation(x_signal, y_signal, 264)
+signal = signal_generator(n, w, N)
+spectre = discrete_fourier_transform(signal)
 
-plotter.plot(range(264), xx_correlated)
-plotter.title("Автокорляція сигналу")
-plotter.xlabel("τ")
-plotter.ylabel("Автокореляційна функція")
-plotter.show()
+figure, axis = plotter.subplots(2, 1)
 
-plotter.plot(range(264), xy_correlated)
-plotter.title("Кореляція двох сигналів")
-plotter.xlabel("τ")
-plotter.ylabel("Кореляційна функція")
+plotter.subplots_adjust(left=0.1, top=0.9, bottom=0.1, right=0.99, hspace=0.5)
+
+axis[0].plot(range(N), signal)
+axis[0].set_title("Сигнал")
+axis[0].set(xlabel='Час', ylabel='Згенерований сигнал')
+
+axis[1].plot(range(N), spectre)
+axis[1].set_title("Дискретне перетворення Фур'є")
+axis[1].set(xlabel='p', ylabel='F(p)')
 plotter.show()
