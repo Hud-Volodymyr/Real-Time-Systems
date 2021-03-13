@@ -27,5 +27,12 @@ def correlation(x, y, step):
     return correlations
 
 
+def correlation_list(x, y, step):
+    correlations = list()
+    for t in range(step):
+        correlations.append(correlate(x, y, t))
+    return correlations
+
+
 def autocorrelation(x, step):
     return correlation(x, x, step)
