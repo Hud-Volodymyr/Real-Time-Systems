@@ -1,28 +1,22 @@
 from random_signals import signal_generator
 import matplotlib.pyplot as plt
-
-
-def expectation(signal):
-    sig_sum = 0
-    for i in range(len(signal)):
-        sig_sum += signal[i]
-    expect = sig_sum / len(signal)
-    return expect
+from correlations import correlation_list, correlation
+from time import time
 
 
 n = 14
 w = 2000
 N = 264
-Mx = [0] * N
-Ns = [0] * N
-for i in range(1, N):
-    N_current = i
-    Ns[i] = N_current
-    sig_cur = signal_generator(n, w, N_current)
-    Mx[i] = expectation(sig_cur)
 
-plt.plot(Ns, Mx)
-plt.title("Графік залежності N від Mx")
-plt.xlabel("N")
-plt.ylabel("Mx")
-plt.show()
+x_signal = signal_generator(n, w, N)
+y_signal = signal_generator(n, w, N)
+start = time()
+correlated_array = correlation(x_signal, y_signal, N)
+end = time()
+print('Час виконання кореляції з масивом: ', end - start)
+
+start = time()
+correlated_list = correlation(x_signal, y_signal, N)
+end = time()
+print('Час виконання кореляції з структурою list(): ', end - start)
+
